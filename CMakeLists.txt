@@ -108,14 +108,13 @@ set(HPP_HEADER_FILES
   include/QtNodes/internal/ConnectionIdUtils.hpp
   include/QtNodes/internal/ConnectionState.hpp
   include/QtNodes/internal/ConnectionStyle.hpp
-  include/QtNodes/internal/DataFlowGraphicsScene.hpp
   include/QtNodes/internal/DataFlowGraphModel.hpp
+  include/QtNodes/internal/DataFlowGraphicsScene.hpp
   include/QtNodes/internal/DefaultNodePainter.hpp
   include/QtNodes/internal/Definitions.hpp
   include/QtNodes/internal/Export.hpp
   include/QtNodes/internal/GraphicsView.hpp
   include/QtNodes/internal/GraphicsViewStyle.hpp
-  include/QtNodes/internal/locateNode.hpp
   include/QtNodes/internal/NodeData.hpp
   include/QtNodes/internal/NodeDelegateModel.hpp
   include/QtNodes/internal/NodeDelegateModelRegistry.hpp
@@ -128,11 +127,12 @@ set(HPP_HEADER_FILES
   include/QtNodes/internal/Serializable.hpp
   include/QtNodes/internal/Style.hpp
   include/QtNodes/internal/StyleCollection.hpp
+  include/QtNodes/internal/UndoCommands.hpp
+  include/QtNodes/internal/locateNode.hpp
   src/ConnectionPainter.hpp
   src/DefaultHorizontalNodeGeometry.hpp
   src/DefaultVerticalNodeGeometry.hpp
   src/NodeConnectionInteraction.hpp
-  src/UndoCommands.hpp
 )
 
 # If we want to give the option to build a static library,
