@@ -515,6 +515,10 @@ void DataFlowGraphModel::onOutPortDataUpdated(NodeId const nodeId, PortIndex con
                                                                     PortType::Out,
                                                                     portIndex);
 
+    // Enable lazy creation of output data.
+    if (connected.empty())
+        return;
+
     QVariant const portDataToPropagate = portData(nodeId, PortType::Out, portIndex, PortRole::Data);
 
     for (auto const &cn : connected) {
