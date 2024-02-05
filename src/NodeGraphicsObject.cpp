@@ -119,6 +119,12 @@ void NodeGraphicsObject::setLockedState()
     setFlag(QGraphicsItem::ItemSendsScenePositionChanges, !locked);
 }
 
+QPainterPath NodeGraphicsObject::shape() const
+{
+    AbstractNodeGeometry &geometry = nodeScene()->nodeGeometry();
+    return geometry.shape(_nodeId);
+}
+
 QRectF NodeGraphicsObject::boundingRect() const
 {
     AbstractNodeGeometry &geometry = nodeScene()->nodeGeometry();

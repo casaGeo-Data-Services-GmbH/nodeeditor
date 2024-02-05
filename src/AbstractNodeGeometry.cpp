@@ -4,6 +4,7 @@
 #include "StyleCollection.hpp"
 
 #include <QMargins>
+#include <QPainterPath>
 
 #include <cmath>
 
@@ -13,6 +14,19 @@ AbstractNodeGeometry::AbstractNodeGeometry(AbstractGraphModel &graphModel)
     : _graphModel(graphModel)
 {
     //
+}
+
+QPainterPath AbstractNodeGeometry::shape(NodeId const nodeId) const
+{
+    auto path = QPainterPath();
+    path.addRect(
+#ifdef NODE_EDITOR_REDUCED_SHAPE_MARGINS
+        QRect({0, 0}, size(nodeId)).marginsAdded({5, 5, 5, 5})
+#else
+        boundingRect(nodeId)
+#endif
+    );
+    return path;
 }
 
 QRectF AbstractNodeGeometry::boundingRect(NodeId const nodeId) const

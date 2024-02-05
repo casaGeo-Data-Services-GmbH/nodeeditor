@@ -17,6 +17,8 @@ public:
     AbstractNodeGeometry(AbstractGraphModel &);
     virtual ~AbstractNodeGeometry() {}
 
+    virtual QPainterPath shape(NodeId const nodeId) const;
+
     /**
    * The node's size plus some additional margin around it to account for drawing
    * effects (for example shadows) or node's parts outside the size rectangle

@@ -39,6 +39,8 @@ public:
 
     NodeState const &nodeState() const { return _nodeState; }
 
+    QPainterPath shape() const override;
+
     QRectF boundingRect() const override;
 
     void setGeometryChanged();

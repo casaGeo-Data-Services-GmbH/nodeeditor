@@ -28,6 +28,7 @@ option(BUILD_DOCS "Build Documentation" "${QT_NODES_DEVELOPER_DEFAULTS}")
 option(BUILD_SHARED_LIBS "Build as shared library" ON)
 option(BUILD_DEBUG_POSTFIX_D "Append d suffix to debug libraries" OFF)
 option(QT_NODES_FORCE_TEST_COLOR "Force colorized unit test output" OFF)
+option(QT_NODES_REDUCED_SHAPE_MARGINS "Reduce the interaction margins of the nodes absolute instead of relative" OFF)
 option(QT_NODES_ABSOLUTE_BOUNDING_RECT_MARGINS "Make the drawing margins of the nodes absolute instead of relative" OFF)
 option(USE_QT6 "Build with Qt6 (Enabled by default)" ON)
 
@@ -170,6 +171,7 @@ target_compile_definitions(QtNodes
   PRIVATE
     NODE_EDITOR_EXPORTS
     #NODE_DEBUG_DRAWING
+    $<$<BOOL:QT_NODES_REDUCED_SHAPE_MARGINS>:NODE_EDITOR_REDUCED_SHAPE_MARGINS>
     $<$<BOOL:QT_NODES_ABSOLUTE_BOUNDING_RECT_MARGINS>:NODE_EDITOR_ABSOLUTE_BOUNDING_RECT_MARGINS>
     QT_NO_KEYWORDS
 )
