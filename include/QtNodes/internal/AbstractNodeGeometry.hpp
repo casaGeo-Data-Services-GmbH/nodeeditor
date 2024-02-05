@@ -24,6 +24,9 @@ public:
    *
    * The default implementation returns QSize + 20 percent of width and heights
    * at each side of the rectangle.
+   *
+   * If NODE_EDITOR_ABSOLUTE_BOUNDING_RECT_MARGINS is defined, the default
+   * implementation instead returns QSize + a fixed margin.
    */
     virtual QRectF boundingRect(NodeId const nodeId) const;
 
