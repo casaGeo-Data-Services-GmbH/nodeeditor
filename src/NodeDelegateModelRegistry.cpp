@@ -13,3 +13,14 @@ std::unique_ptr<NodeDelegateModel> NodeDelegateModelRegistry::create(QString con
 
     return nullptr;
 }
+
+QString NodeDelegateModelRegistry::categoryDisplayName(QString const &category) const
+{
+    auto it = _categoriesDisplayName.find(category);
+
+    if (it != _categoriesDisplayName.end()) {
+        return it->second;
+    }
+
+    return category;
+}

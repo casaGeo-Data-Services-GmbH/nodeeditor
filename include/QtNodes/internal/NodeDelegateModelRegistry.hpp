@@ -25,6 +25,7 @@ public:
     using RegisteredModelsCategoryMap = std::unordered_map<QString, QString>;
     using RegisteredModelsDisplayNameMap = std::unordered_map<QString, QString>;
     using CategoriesSet = std::set<QString>;
+    using CategoriesDisplayNameMap = std::unordered_map<QString, QString>;
 
     NodeDelegateModelRegistry() = default;
     ~NodeDelegateModelRegistry() = default;
@@ -76,14 +77,23 @@ public:
 
     CategoriesSet const &categories() const { return _categories; }
 
+    QString categoryDisplayName(QString const &category) const;
+
+    void registerCategoryDisplayName(QString const &category, QString displayName)
+    {
+        _categoriesDisplayName[category] = std::move(displayName);
+    }
+
 private:
+    RegisteredModelCreatorsMap _registeredItemCreators;
+
     RegisteredModelsCategoryMap _registeredModelsCategory;
 
     RegisteredModelsDisplayNameMap _registeredModelsDisplayName;
 
     CategoriesSet _categories;
 
-    RegisteredModelCreatorsMap _registeredItemCreators;
+    CategoriesDisplayNameMap _categoriesDisplayName;
 
 private:
     // If the registered ModelType class has the static member method
