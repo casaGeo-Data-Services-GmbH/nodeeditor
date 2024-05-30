@@ -23,6 +23,7 @@ public:
     using RegistryItemCreator = std::function<RegistryItemPtr()>;
     using RegisteredModelCreatorsMap = std::unordered_map<QString, RegistryItemCreator>;
     using RegisteredModelsCategoryMap = std::unordered_map<QString, QString>;
+    using RegisteredModelsDisplayNameMap = std::unordered_map<QString, QString>;
     using CategoriesSet = std::set<QString>;
 
     NodeDelegateModelRegistry() = default;
@@ -37,18 +38,20 @@ public:
 
 public:
     template<typename ModelType>
-    void registerModel(RegistryItemCreator creator, QString const &category = "Nodes")
+    void registerModel(RegistryItemCreator creator,
+                       QString const &category = QStringLiteral("Nodes"))
     {
-        QString const name = computeName<ModelType>(HasStaticMethodName<ModelType>{}, creator);
+        QString const name = computeName<ModelType>(creator);
         if (!_registeredItemCreators.count(name)) {
-            _registeredItemCreators[name] = std::move(creator);
             _categories.insert(category);
             _registeredModelsCategory[name] = category;
+            _registeredModelsDisplayName[name] = computeDisplayName<ModelType>(creator);
+            _registeredItemCreators[name] = std::move(creator);
         }
     }
 
     template<typename ModelType>
-    void registerModel(QString const &category = "Nodes")
+    void registerModel(QString const &category = QStringLiteral("Nodes"))
     {
         RegistryItemCreator creator = []() { return std::make_unique<ModelType>(); };
         registerModel<ModelType>(std::move(creator), category);
@@ -56,14 +59,27 @@ public:
 
     std::unique_ptr<NodeDelegateModel> create(QString const &modelName);
 
-    RegisteredModelCreatorsMap const &registeredModelCreators() const;
+    RegisteredModelCreatorsMap const &registeredModelCreators() const
+    {
+        return _registeredItemCreators;
+    }
 
-    RegisteredModelsCategoryMap const &registeredModelsCategoryAssociation() const;
+    RegisteredModelsCategoryMap const &registeredModelsCategoryAssociation() const
+    {
+        return _registeredModelsCategory;
+    }
 
-    CategoriesSet const &categories() const;
+    RegisteredModelsDisplayNameMap const &registeredModelsDisplayNameAssociation() const
+    {
+        return _registeredModelsDisplayName;
+    }
+
+    CategoriesSet const &categories() const { return _categories; }
 
 private:
     RegisteredModelsCategoryMap _registeredModelsCategory;
+
+    RegisteredModelsDisplayNameMap _registeredModelsDisplayName;
 
     CategoriesSet _categories;
 
@@ -85,15 +101,37 @@ private:
     {};
 
     template<typename ModelType>
-    static QString computeName(std::true_type, RegistryItemCreator const &)
+    static QString computeName(RegistryItemCreator const &creator)
     {
-        return ModelType::Name();
+        if constexpr (HasStaticMethodName<ModelType>::value) {
+            return ModelType::Name();
+        } else {
+            return creator()->name();
+        }
     }
 
+    // If the registered ModelType class has the static member method
+    // `static QString DisplayName();`, use it. Otherwise use the non-static
+    // method: `virtual QString displayName() const;`
+    template<typename T, typename = void>
+    struct HasStaticMethodDisplayName : std::false_type
+    {};
+
+    template<typename T>
+    struct HasStaticMethodDisplayName<
+        T,
+        typename std::enable_if<std::is_same<decltype(T::DisplayName()), QString>::value>::type>
+        : std::true_type
+    {};
+
     template<typename ModelType>
-    static QString computeName(std::false_type, RegistryItemCreator const &creator)
+    static QString computeDisplayName(RegistryItemCreator const &creator)
     {
-        return creator()->name();
+        if constexpr (HasStaticMethodDisplayName<ModelType>::value) {
+            return ModelType::DisplayName();
+        } else {
+            return creator()->displayName();
+        }
     }
 
     template<typename T>

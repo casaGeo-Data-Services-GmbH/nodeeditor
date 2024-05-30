@@ -44,6 +44,9 @@ public:
     /// Name makes this model unique
     virtual QString name() const = 0;
 
+    /// Name that is displayed to the user
+    virtual QString displayName() const { return name(); }
+
 public:
     QJsonObject save() const override;
 
