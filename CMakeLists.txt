@@ -271,6 +271,11 @@ install(EXPORT QtNodesTargets
   DESTINATION ${INSTALL_CONFIGDIR}
 )
 
+export(EXPORT QtNodesTargets
+  FILE "${CMAKE_CURRENT_BINARY_DIR}/QtNodesTargets.cmake"
+  NAMESPACE QtNodes::
+)
+
 include(CMakePackageConfigHelpers)
 
 configure_package_config_file(${CMAKE_CURRENT_LIST_DIR}/cmake/QtNodesConfig.cmake.in
