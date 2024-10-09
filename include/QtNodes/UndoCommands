@@ -1,1 +1,1 @@
-#include "internal/UndoCommands.hpp"
+#include "internal/UndoCommands.hpp" // IWYU pragma: export

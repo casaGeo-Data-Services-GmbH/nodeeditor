@@ -1,1 +1,1 @@
-#include "internal/AbstractNodePainter.hpp"
+#include "internal/AbstractNodePainter.hpp" // IWYU pragma: export

@@ -1,5 +1,7 @@
 #pragma once
 
+// IWYU pragma: private, include <QtNodes/NodeDelegateModelRegistry>
+
 #include "Export.hpp"
 #include "NodeDelegateModel.hpp"
 

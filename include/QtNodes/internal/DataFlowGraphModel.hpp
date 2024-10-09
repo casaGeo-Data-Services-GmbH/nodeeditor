@@ -1,5 +1,7 @@
 #pragma once
 
+// IWYU pragma: private, include <QtNodes/DataFlowGraphModel>
+
 #include "AbstractGraphModel.hpp"
 #include "ConnectionIdUtils.hpp"
 #include "NodeDelegateModelRegistry.hpp"

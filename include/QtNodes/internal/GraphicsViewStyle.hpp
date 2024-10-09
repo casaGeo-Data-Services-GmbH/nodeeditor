@@ -1,5 +1,7 @@
 #pragma once
 
+// IWYU pragma: private, include <QtNodes/GraphicsViewStyle>
+
 #include <QtGui/QColor>
 
 #include "Export.hpp"

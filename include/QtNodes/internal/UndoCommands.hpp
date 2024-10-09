@@ -1,5 +1,7 @@
 #pragma once
 
+// IWYU pragma: private, include <QtNodes/UndoCommands>
+
 #include "Definitions.hpp"
 #include "Export.hpp"
 

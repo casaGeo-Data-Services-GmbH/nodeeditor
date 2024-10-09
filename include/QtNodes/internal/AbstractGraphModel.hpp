@@ -1,8 +1,9 @@
 #pragma once
 
+// IWYU pragma: private, include <QtNodes/AbstractGraphModel>
+
 #include "Export.hpp"
 
-#include <unordered_map>
 #include <unordered_set>
 
 #include <QtCore/QJsonObject>

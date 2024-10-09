@@ -1,2 +1,1 @@
-#include "internal/NodeGeometry.hpp"
-
+#include "internal/NodeGeometry.hpp" // IWYU pragma: export

@@ -1,5 +1,7 @@
 #pragma once
 
+// IWYU pragma: private, include <QtNodes/DataFlowGraphicsScene>
+
 #include "BasicGraphicsScene.hpp"
 #include "DataFlowGraphModel.hpp"
 #include "Export.hpp"

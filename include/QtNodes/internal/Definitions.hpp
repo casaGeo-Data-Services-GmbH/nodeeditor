@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+// IWYU pragma: private, include <QtNodes/Definitions>
+
 #include "Export.hpp"
 
 #include <QtCore/QMetaObject>

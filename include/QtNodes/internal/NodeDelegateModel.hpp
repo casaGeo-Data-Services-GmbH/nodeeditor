@@ -1,5 +1,7 @@
 #pragma once
 
+// IWYU pragma: private, include <QtNodes/NodeDelegateModel>
+
 #include <memory>
 
 #include <QtWidgets/QWidget>

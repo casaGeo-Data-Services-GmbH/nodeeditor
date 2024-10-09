@@ -1,5 +1,7 @@
 #pragma once
 
+// IWYU pragma: private, include <QtNodes/NodeData>
+
 #include <memory>
 
 #include <QtCore/QObject>

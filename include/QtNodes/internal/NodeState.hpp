@@ -1,7 +1,6 @@
 #pragma once
 
-#include <unordered_map>
-#include <vector>
+// IWYU pragma: private, include <QtNodes/NodeState>
 
 #include <QtCore/QPointF>
 #include <QtCore/QPointer>
@@ -10,7 +9,6 @@
 #include "Export.hpp"
 
 #include "Definitions.hpp"
-#include "NodeData.hpp"
 
 namespace QtNodes {
 

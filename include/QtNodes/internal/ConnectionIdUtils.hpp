@@ -1,5 +1,7 @@
 #pragma once
 
+// IWYU pragma: private, include <QtNodes/ConnectionIdUtils>
+
 #include "Definitions.hpp"
 
 #include <QJsonObject>

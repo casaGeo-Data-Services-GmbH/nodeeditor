@@ -1,1 +1,1 @@
-#include "internal/StyleCollection.hpp"
+#include "internal/StyleCollection.hpp" // IWYU pragma: export

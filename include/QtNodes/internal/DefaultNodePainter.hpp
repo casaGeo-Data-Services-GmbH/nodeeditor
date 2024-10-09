@@ -1,5 +1,7 @@
 #pragma once
 
+// IWYU pragma: private, include <QtNodes/DefaultNodePainter>
+
 #include <QtGui/QPainter>
 
 #include "AbstractNodePainter.hpp"

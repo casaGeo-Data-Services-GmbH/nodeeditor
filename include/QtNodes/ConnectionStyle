@@ -1,1 +1,1 @@
-#include "internal/ConnectionStyle.hpp"
+#include "internal/ConnectionStyle.hpp" // IWYU pragma: export

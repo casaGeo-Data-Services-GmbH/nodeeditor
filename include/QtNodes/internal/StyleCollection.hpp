@@ -1,5 +1,7 @@
 #pragma once
 
+// IWYU pragma: private, include <QtNodes/StyleCollection>
+
 #include "Export.hpp"
 
 #include "ConnectionStyle.hpp"

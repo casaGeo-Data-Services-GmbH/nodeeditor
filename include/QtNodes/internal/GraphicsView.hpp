@@ -1,5 +1,7 @@
 #pragma once
 
+// IWYU pragma: private, include <QtNodes/GraphicsView>
+
 #include <QtWidgets/QGraphicsView>
 
 #include "Export.hpp"
