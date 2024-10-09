@@ -128,22 +128,26 @@ inline std::ostream &operator<<(std::ostream &ostr, ConnectionId const connectio
 
 inline QJsonObject toJson(ConnectionId const &connId)
 {
+    using namespace Qt::StringLiterals;
+
     QJsonObject connJson;
 
-    connJson["outNodeId"] = static_cast<qint64>(connId.outNodeId);
-    connJson["outPortIndex"] = static_cast<qint64>(connId.outPortIndex);
-    connJson["intNodeId"] = static_cast<qint64>(connId.inNodeId);
-    connJson["inPortIndex"] = static_cast<qint64>(connId.inPortIndex);
+    connJson["outNodeId"_L1] = static_cast<qint64>(connId.outNodeId);
+    connJson["outPortIndex"_L1] = static_cast<qint64>(connId.outPortIndex);
+    connJson["intNodeId"_L1] = static_cast<qint64>(connId.inNodeId);
+    connJson["inPortIndex"_L1] = static_cast<qint64>(connId.inPortIndex);
 
     return connJson;
 }
 
 inline ConnectionId fromJson(QJsonObject const &connJson)
 {
-    ConnectionId connId{static_cast<NodeId>(connJson["outNodeId"].toInt(InvalidNodeId)),
-                        static_cast<PortIndex>(connJson["outPortIndex"].toInt(InvalidPortIndex)),
-                        static_cast<NodeId>(connJson["intNodeId"].toInt(InvalidNodeId)),
-                        static_cast<PortIndex>(connJson["inPortIndex"].toInt(InvalidPortIndex))};
+    using namespace Qt::StringLiterals;
+
+    ConnectionId connId{static_cast<NodeId>(connJson["outNodeId"_L1].toInt(InvalidNodeId)),
+                        static_cast<PortIndex>(connJson["outPortIndex"_L1].toInt(InvalidPortIndex)),
+                        static_cast<NodeId>(connJson["intNodeId"_L1].toInt(InvalidNodeId)),
+                        static_cast<PortIndex>(connJson["inPortIndex"_L1].toInt(InvalidPortIndex))};
 
     return connId;
 }
