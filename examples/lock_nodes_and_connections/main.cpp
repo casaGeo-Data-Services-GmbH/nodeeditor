@@ -65,11 +65,11 @@ int main(int argc, char *argv[])
     vbl->addStretch();
     groupBox->setLayout(vbl);
 
-    QObject::connect(cb1, &QCheckBox::stateChanged, [&graphModel](int state) {
+    QObject::connect(cb1, &QCheckBox::checkStateChanged, [&graphModel](Qt::CheckState state) {
         graphModel.setNodesLocked(state == Qt::Checked);
     });
 
-    QObject::connect(cb2, &QCheckBox::stateChanged, [&graphModel](int state) {
+    QObject::connect(cb2, &QCheckBox::checkStateChanged, [&graphModel](Qt::CheckState state) {
         graphModel.setDetachPossible(state == Qt::Checked);
     });
 
