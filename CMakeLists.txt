@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.11)
 
 cmake_policy(SET CMP0072 NEW) # new in 3.11. The NEW behavior for this policy is to set OpenGL_GL_PREFERENCE to GLVND.
 cmake_policy(SET CMP0068 NEW) # new in 3.9. The NEW behavior of this policy is to ignore the RPATH settings for install_name on macOS.
@@ -77,21 +77,21 @@ set(CPP_SOURCE_FILES
   src/AbstractNodeGeometry.cpp
   src/BasicGraphicsScene.cpp
   src/ConnectionGraphicsObject.cpp
-  src/ConnectionPainter.cpp
   src/ConnectionState.cpp
   src/ConnectionStyle.cpp
   src/DataFlowGraphModel.cpp
   src/DataFlowGraphicsScene.cpp
+  src/DefaultConnectionPainter.cpp
   src/DefaultHorizontalNodeGeometry.cpp
+  src/DefaultNodePainter.cpp
   src/DefaultVerticalNodeGeometry.cpp
   src/Definitions.cpp
   src/GraphicsView.cpp
   src/GraphicsViewStyle.cpp
-  src/NodeDelegateModelRegistry.cpp
   src/NodeConnectionInteraction.cpp
   src/NodeDelegateModel.cpp
+  src/NodeDelegateModelRegistry.cpp
   src/NodeGraphicsObject.cpp
-  src/DefaultNodePainter.cpp
   src/NodeState.cpp
   src/NodeStyle.cpp
   src/StyleCollection.cpp
@@ -100,6 +100,7 @@ set(CPP_SOURCE_FILES
 )
 
 set(HPP_HEADER_FILES
+  include/QtNodes/internal/AbstractConnectionPainter.hpp
   include/QtNodes/internal/AbstractGraphModel.hpp
   include/QtNodes/internal/AbstractNodeGeometry.hpp
   include/QtNodes/internal/AbstractNodePainter.hpp
@@ -110,9 +111,8 @@ set(HPP_HEADER_FILES
   include/QtNodes/internal/ConnectionIdUtils.hpp
   include/QtNodes/internal/ConnectionState.hpp
   include/QtNodes/internal/ConnectionStyle.hpp
-  include/QtNodes/internal/DataFlowGraphModel.hpp
   include/QtNodes/internal/DataFlowGraphicsScene.hpp
-  include/QtNodes/internal/DefaultNodePainter.hpp
+  include/QtNodes/internal/DataFlowGraphModel.hpp
   include/QtNodes/internal/Definitions.hpp
   include/QtNodes/internal/Export.hpp
   include/QtNodes/internal/GraphicsView.hpp
@@ -129,12 +129,12 @@ set(HPP_HEADER_FILES
   include/QtNodes/internal/Serializable.hpp
   include/QtNodes/internal/Style.hpp
   include/QtNodes/internal/StyleCollection.hpp
+  include/QtNodes/internal/DefaultConnectionPainter.hpp
+  include/QtNodes/internal/DefaultHorizontalNodeGeometry.hpp
+  include/QtNodes/internal/DefaultNodePainter.hpp
+  include/QtNodes/internal/DefaultVerticalNodeGeometry.hpp
+  include/QtNodes/internal/NodeConnectionInteraction.hpp
   include/QtNodes/internal/UndoCommands.hpp
-  include/QtNodes/internal/locateNode.hpp
-  src/ConnectionPainter.hpp
-  src/DefaultHorizontalNodeGeometry.hpp
-  src/DefaultVerticalNodeGeometry.hpp
-  src/NodeConnectionInteraction.hpp
 )
 
 # If we want to give the option to build a static library,
@@ -167,7 +167,7 @@ target_link_libraries(QtNodes
 
 target_compile_definitions(QtNodes
   PUBLIC
-    NODE_EDITOR_SHARED
+    $<IF:$<BOOL:${BUILD_SHARED_LIBS}>, NODE_EDITOR_SHARED, NODE_EDITOR_STATIC>
   PRIVATE
     NODE_EDITOR_EXPORTS
     #NODE_DEBUG_DRAWING

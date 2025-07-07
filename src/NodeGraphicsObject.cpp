@@ -37,6 +37,7 @@ NodeGraphicsObject::NodeGraphicsObject(BasicGraphicsScene &scene, NodeId nodeId)
 
     NodeStyle nodeStyle(nodeStyleJson);
 
+    if(nodeStyle.ShadowEnabled)
     {
         auto effect = new QGraphicsDropShadowEffect;
         effect->setOffset(4, 4);
@@ -76,6 +77,14 @@ BasicGraphicsScene *NodeGraphicsObject::nodeScene() const
     return dynamic_cast<BasicGraphicsScene *>(scene());
 }
 
+void NodeGraphicsObject::updateQWidgetEmbedPos()
+{
+  if (_proxyWidget) {
+    AbstractNodeGeometry &geometry = nodeScene()->nodeGeometry();
+    _proxyWidget->setPos(geometry.widgetPosition(_nodeId));
+  }
+}
+
 void NodeGraphicsObject::embedQWidget()
 {
     AbstractNodeGeometry &geometry = nodeScene()->nodeGeometry();
@@ -99,7 +108,7 @@ void NodeGraphicsObject::embedQWidget()
             _proxyWidget->setMinimumHeight(widgetHeight);
         }
 
-        _proxyWidget->setPos(geometry.widgetPosition(_nodeId));
+        updateQWidgetEmbedPos();
 
         //update();
 

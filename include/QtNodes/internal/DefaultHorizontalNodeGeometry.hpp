@@ -9,12 +9,14 @@ namespace QtNodes {
 class AbstractGraphModel;
 class BasicGraphicsScene;
 
-class NODE_EDITOR_PUBLIC DefaultVerticalNodeGeometry : public AbstractNodeGeometry
+class NODE_EDITOR_PUBLIC DefaultHorizontalNodeGeometry : public AbstractNodeGeometry
 {
 public:
-    DefaultVerticalNodeGeometry(AbstractGraphModel &graphModel);
+    DefaultHorizontalNodeGeometry(AbstractGraphModel &graphModel);
 
 public:
+    QRectF boundingRect(NodeId const nodeId) const override;
+
     QSize size(NodeId const nodeId) const override;
 
     void recomputeSize(NodeId const nodeId) const override;
@@ -26,7 +28,6 @@ public:
     QPointF portTextPosition(NodeId const nodeId,
                              PortType const portType,
                              PortIndex const PortIndex) const override;
-
     QPointF captionPosition(NodeId const nodeId) const override;
 
     QRectF captionRect(NodeId const nodeId) const override;
@@ -39,12 +40,11 @@ private:
     QRectF portTextRect(NodeId const nodeId,
                         PortType const portType,
                         PortIndex const portIndex) const;
-    /// Finds
-    unsigned int maxHorizontalPortsExtent(NodeId const nodeId) const;
+
+    /// Finds max number of ports and multiplies by (a port height + interval)
+    unsigned int maxVerticalPortsExtent(NodeId const nodeId) const;
 
     unsigned int maxPortsTextAdvance(NodeId const nodeId, PortType const portType) const;
-
-    unsigned int portCaptionsHeight(NodeId const nodeId, PortType const portType) const;
 
 private:
     // Some variables are mutable because we need to change drawing

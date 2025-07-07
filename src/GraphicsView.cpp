@@ -93,6 +93,7 @@ void GraphicsView::setScene(BasicGraphicsScene *scene)
         _deleteSelectionAction = new QAction(QStringLiteral("Delete Selection"), this);
         _deleteSelectionAction->setShortcutContext(Qt::ShortcutContext::WidgetShortcut);
         _deleteSelectionAction->setShortcut(QKeySequence(QKeySequence::Delete));
+        _deleteSelectionAction->setAutoRepeat(false);
         connect(_deleteSelectionAction,
                 &QAction::triggered,
                 this,
@@ -106,6 +107,7 @@ void GraphicsView::setScene(BasicGraphicsScene *scene)
         _duplicateSelectionAction = new QAction(QStringLiteral("Duplicate Selection"), this);
         _duplicateSelectionAction->setShortcutContext(Qt::ShortcutContext::WidgetShortcut);
         _duplicateSelectionAction->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_D));
+        _duplicateSelectionAction->setAutoRepeat(false);
         connect(_duplicateSelectionAction,
                 &QAction::triggered,
                 this,
@@ -119,6 +121,7 @@ void GraphicsView::setScene(BasicGraphicsScene *scene)
         _copySelectionAction = new QAction(QStringLiteral("Copy Selection"), this);
         _copySelectionAction->setShortcutContext(Qt::ShortcutContext::WidgetShortcut);
         _copySelectionAction->setShortcut(QKeySequence(QKeySequence::Copy));
+        _copySelectionAction->setAutoRepeat(false);
         connect(_copySelectionAction,
                 &QAction::triggered,
                 this,
@@ -129,9 +132,10 @@ void GraphicsView::setScene(BasicGraphicsScene *scene)
 
     {
         delete _pasteAction;
-        _pasteAction = new QAction(QStringLiteral("Copy Selection"), this);
+        _pasteAction = new QAction(QStringLiteral("Paste Selection"), this);
         _pasteAction->setShortcutContext(Qt::ShortcutContext::WidgetShortcut);
         _pasteAction->setShortcut(QKeySequence(QKeySequence::Paste));
+        _pasteAction->setAutoRepeat(false);
         connect(_pasteAction, &QAction::triggered, this, &GraphicsView::onPasteObjects);
 
         addAction(_pasteAction);

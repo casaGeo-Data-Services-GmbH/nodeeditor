@@ -29,27 +29,6 @@ QPainterPath AbstractNodeGeometry::shape(NodeId const nodeId) const
     return path;
 }
 
-QRectF AbstractNodeGeometry::boundingRect(NodeId const nodeId) const
-{
-    QSize s = size(nodeId);
-
-#ifdef NODE_EDITOR_ABSOLUTE_BOUNDING_RECT_MARGINS
-    static constexpr int widthMargin = 10;
-    static constexpr int heightMargin = 10;
-#else
-    double ratio = 0.20;
-
-    int widthMargin = s.width() * ratio;
-    int heightMargin = s.height() * ratio;
-#endif
-
-    QMargins margins(widthMargin, heightMargin, widthMargin, heightMargin);
-
-    QRectF r(QPointF(0, 0), s);
-
-    return r.marginsAdded(margins);
-}
-
 QPointF AbstractNodeGeometry::portScenePosition(NodeId const nodeId,
                                                 PortType const portType,
                                                 PortIndex const index,
